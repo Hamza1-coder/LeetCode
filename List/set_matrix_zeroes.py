@@ -1,28 +1,49 @@
 from typing import List
 import unittest
 
+# class Solution:              
+#     def setZeroes(self, matrix: List[List[int]]) -> None:
+#         n = len(matrix)
+#         m = len(matrix[0])
+#         for i in range(n):
+#             for j in range(m):
+#                 if matrix[i][j] == 0:
+#                     for jj in range(m):
+#                         if matrix[i][jj] !=0:
+#                             matrix[i][jj] = -1
+                        
+#                     for ii in range(n):
+#                         if matrix[ii][j] != 0:
+#                             matrix[ii][j] = -1
+                        
+#         for x in range(n):
+#             for y in range(m):
+#                 if(matrix[x][y] == -1):
+#                     matrix[x][y] = 0
+                
+#         return matrix;
+
+
 class Solution:              
     def setZeroes(self, matrix: List[List[int]]) -> None:
         n = len(matrix)
         m = len(matrix[0])
+        
+        row = [0] * n
+        col = [0] * m
+        
         for i in range(n):
             for j in range(m):
                 if matrix[i][j] == 0:
-                    for jj in range(m):
-                        if matrix[i][jj] !=0:
-                            matrix[i][jj] = -1
-                        
-                    for ii in range(n):
-                        if matrix[ii][j] != 0:
-                            matrix[ii][j] = -1
-                        
-        for x in range(n):
-            for y in range(m):
-                if(matrix[x][y] == -1):
-                    matrix[x][y] = 0
+                    row[i] = 1
+                    col[j] = 1
+                    
+        for i in range(n):
+            for j in range(m):
+                if row[i] or col[j]:
+                    matrix[i][j] = 0
                 
-        return matrix;
-                
+        return matrix
     
 class TestSolution(unittest.TestCase):
     def test_setZeroes(self):
